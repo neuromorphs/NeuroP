@@ -24,6 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
       
       # installs the prerequisites for building the docs
       - name: Install requirements for building docs
@@ -32,3 +33,13 @@ jobs:
       # builds the docs
       - name: Build the documentation
         run: cd docs && make
+
+      # deploys the docs
+      - name: Deploy the documentation
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build
+          force_orphan: true
