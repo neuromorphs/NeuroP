@@ -1,0 +1,34 @@
+# This workflow should create and publish a documentation
+
+name: Deploy Docs
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    
+  # build and deploy the actual documentation
+  build:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      # installs the prerequisites for building the docs
+      - name: Install requirements for building docs
+        run: travis_retry pip install -U -r docs/requirements.txt
+
+      # builds the docs
+      - name: Build the documentation
+        run: cd docs && make
