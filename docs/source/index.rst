@@ -3,16 +3,31 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-:math:`\text{Neuro}^\text{P}`
+.. title:: Welcome
+
+**N**\ euro\ **P**
 ==================================
-Solving :math:`\text{N}^\text{P}`-hard problems on neuromorphic hardware using quadratic unconstrained binary optimization (QUBO).
+Solving :math:`\text{NP}`-hard problems on neuromorphic hardware using quadratic unconstrained binary optimization (QUBO).
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. warning::
+   This project is under active development.
+
+.. figure:: _static/neurop.png
+   :alt: overview of the library
+
+   The :math:`\text{Neuro}^\text{P}` library aims to automate the pipeline from NP-hard problem formulations to neuromorphic hardware and back.
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree: generated
+
+   ~neurop.Problem
+   ~neurop.Model
+   ~neurop.Backend
 
 
-Indices and tables
+Index
 ==================
 
 * :ref:`genindex`
