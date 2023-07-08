@@ -15,7 +15,7 @@ Solving :math:`\text{NP}`-hard problems on neuromorphic hardware using quadratic
 .. figure:: _static/neurop.png
    :alt: overview of the library
 
-   The :math:`\text{Neuro}^\text{P}` library aims to automate the pipeline from NP-hard problem formulations to neuromorphic hardware and back.
+   The **N**\ euro\ **P** library aims to automate the pipeline from various :math:`\text{NP}`-hard problem formulations to neuromorphic hardware and back.
 
 .. rubric:: Modules
 
