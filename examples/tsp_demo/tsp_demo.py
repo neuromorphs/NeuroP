@@ -8,6 +8,8 @@ from PySide6 import QtCore, QtWidgets, QtGui
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
+from mpl_toolkits.basemap import Basemap
+
 
 class MplCanvas(FigureCanvas):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
@@ -36,6 +38,7 @@ class MainWindow(QtWidgets.QMainWindow):
         
         # create the input field for the chat
         self.chat_input = QtWidgets.QPlainTextEdit(self)
+        self.chat_input.setFixedWidth(400)
         
         # create the output field for the chat
         self.chat_output = QtWidgets.QPlainTextEdit(self)
@@ -51,6 +54,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # create the canvas for plotting the problem solution
         self.solution_canvas = MplCanvas(self, height=8, width=8, dpi=100)
+        
+        # TODO: make reasonable plot here
+        m=Basemap(llcrnrlon=-100, llcrnrlat=-58,urcrnrlon=-30,urcrnrlat=15)
+        m.drawcoastlines(color='black', linewidth=2, ax = self.solution_canvas.axes)
         
         # create the canvas for plotting the internal network state
         self.state_canvas = MplCanvas(self, dpi=100)
@@ -99,9 +106,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def update_chat_input(self):
         self.chat_output_text = self.chat_input.toPlainText()
+        self.chat_output.setStyleSheet("background-color: #CCCCCC;")
+        
+        # TODO: Replace by actual API query to ChatGPT
         QtCore.QTimer.singleShot(1000,self.update_chat_output)
         
     def update_chat_output(self):
+        self.chat_output.setStyleSheet("background-color: #333333;")
         self.chat_output.setPlainText(self.chat_output_text)
 
 
@@ -114,14 +125,14 @@ class MainWindow(QtWidgets.QMainWindow):
             # First time we have no plot reference, so do a normal plot.
             # .plot returns a list of line <reference>s, as we're
             # only getting one we can take the first element.
-            plot_refs = self.solution_canvas.axes.plot(self.xdata, self.ydata, 'r')
+            plot_refs = self.energy_canvas.axes.plot(self.xdata, self.ydata, 'r')
             self._plot_ref = plot_refs[0]
         else:
             # We have a reference, we can use it to update the data for that line.
             self._plot_ref.set_ydata(self.ydata)
 
         # Trigger the canvas to update and redraw.
-        self.solution_canvas.draw()
+        self.energy_canvas.draw()
 
 app = QtWidgets.QApplication(sys.argv)
 w = MainWindow()
