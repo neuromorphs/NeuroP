@@ -4,3 +4,5 @@
 .. automodule:: neurop.Problem.Problem
 .. automodule:: neurop.Problem.ILPProblem
 """
+
+from .ILPProblem import ILPProblem

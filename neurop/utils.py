@@ -66,20 +66,20 @@ def substitute_integer_to_binary(values: dict, substitutions: dict, binary_varia
     M = substitutions_mat.jacobian(binary_variables)
     b = substitutions_mat-M*variables_mat
     var_index = dict(zip(substitutions.keys(),range(len(substitutions))))
-    ret = sympy.zeros(M.shape[1],1)
+    ret = np.zeros((M.shape[1],), dtype=bool)
     for var,val in values.items():
         i = var_index[var]
         grad = M[i,:]
         bb = b[i]
-        ret += sympy.Matrix([[1 if g != 0 and (val-bb) % (2*g) >= g else 0] for g in grad])
-    return ret
+        ret += np.array([(g != 0 and (val-bb) % (2*g) >= g) for g in grad], dtype=bool)
+    return dict(zip(binary_variables, ret))
 
-def substitute_binary_to_integer(values, substitutions, binary_variables):
+def substitute_binary_to_integer(values: dict, substitutions, binary_variables):
     # substitutions_mat = sympy.Matrix(list(substitutions.values()))
     # variables_mat = sympy.Matrix(variables)
     # M = substitutions_mat.jacobian(variables)
     # b = substitutions_mat-M*variables_mat
-    s = dict(zip(binary_variables, values))
+    s = dict(((var, values[var]) for var in binary_variables))
     return dict( (k,eq.subs(s)) for k,eq in substitutions.items())
 
 # binary = substitute_integer_to_binary({x1:7, x2:1, x3: 31}, substitutions, variables)

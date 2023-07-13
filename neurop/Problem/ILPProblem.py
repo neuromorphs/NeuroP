@@ -3,47 +3,81 @@
 .. autoclass:: neurop.Problem.ILPProblem.ILPProblem
 """
 
+from collections.abc import Iterable
 import optlang
 import numpy as np
 import sympy
-from optlang import Model, Variable, Constraint, Objective
+from optlang import Model as OptProblem, Variable, Constraint, Objective
 
-from neurop.Problem.Problem import Problem
+from neurop import BaseProblem
+from neurop import BaseModel
+from neurop.Model import QUBOModel
 from neurop.utils import binary_expansion, range_of_polynomial_with_bounded_vars, substitute_binary_to_integer, substitute_integer_to_binary
 
 
-class ILPProblem(Problem):
+class ILPProblem(BaseProblem):
     """Description of ILP Problems for conversion to QUBO."""
     
-    def __init__(self, model: Model):
-        
-        self.model = model
-        
-        super().__init__()
-    
-    
-    def to_qubo(self):
-        self.substitutions = dict()
-        self.variables = []
-        leq_constraints = []
-        self.constraints = []
+    def __init__(self, problem: OptProblem, initializer=None, penalty=10):
+        """Initializes the ILP problem.
 
-        # go through all self.variables
-        for var_name, var in self.model.variables.iteritems():
+        Args:
+            problem (OptProblem): the optlang problem
+            initializer (_type_, optional): function to initialize the parameters of the problem. Defaults to None, which means that parameters will be randomly initialized.
+        """
+        self.problem = problem
+        self.penalty = penalty
+        
+        if initializer is None:
+            initializer = lambda: dict((var, np.random.randint(var.lb, var.ub+1)) for var in self.problem.variables)
+        
+        super().__init__(initializer=initializer)
+    
+    def supports_model(self, model_type) -> bool:
+        return model_type in [QUBOModel]
+    
+    def convert_to_model(self, model_type, backend=None) -> BaseModel:
+        """Converts the problem to a model of given type, if supported.
+
+        Args:
+            backend (Backend, optional): The backend for which to derive the QUBO form. Defaults to None, which means no special requirements are imposed on the Q matrix.
+
+        Raises:
+            ValueError: May return a ValueError if the problem cannot be converted to the required model type.
+
+        Returns:
+            np.ndarray: returns the QUBO matrix
+        """
+        
+        if model_type == QUBOModel:
+            # convert the problem to QUBO form
+            return self.to_qubo(backend=backend)
+        else:
+            raise ValueError("Cannot convert problem to model type {}".format(model_type))
+    
+    
+    def to_qubo(self, backend=None) -> QUBOModel:
+        substitutions = dict()
+        variables = []
+        leq_constraints = []
+        constraints = []
+
+        # go through all variables
+        for var_name, var in self.problem.variables.iteritems():
             
             # expand every non-binary variable
             if var.type != "binary":
                 sub_vars, sub, constraint = binary_expansion(var)
-                self.substitutions[var] = sub
-                self.variables.extend(sub_vars)
+                substitutions[var] = sub
+                variables.extend(sub_vars)
                 leq_constraints.append(constraint)
             else:
-                self.variables.add(var)
+                variables.add(var)
             
-        # copy over all the explicit constraints, but substituting in the new self.variables and breaking them up into positive and negative constraints
-        for constraint in self.model.constraints:
-            # substitute the expanded self.variables into the constraint expression
-            expr = constraint.expression.subs(self.substitutions, simultaneous=False)
+        # copy over all the explicit constraints, but substituting in the new variables and breaking them up into positive and negative constraints
+        for constraint in self.problem.constraints:
+            # substitute the expanded variables into the constraint expression
+            expr = constraint.expression.subs(substitutions, simultaneous=False)
             
             # if both upper and lower bounds coincide, this is not an inequality constraint but rather an equation
             if constraint.ub is not None and constraint.lb is not None and constraint.ub==constraint.lb:
@@ -54,7 +88,7 @@ class ILPProblem(Problem):
                 if not (computed_lb <= constraint.lb <= computed_ub):
                     raise ValueError("Cannot satisfy constraint {}<={}<={} because {}<={}<={}".format(constraint.lb, constraint.expression, constraint.ub, computed_lb, expr, computed_ub))
 
-                self.constraints.append(constraint.expression-constraint.ub)
+                constraints.append(constraint.expression-constraint.ub)
             else:
                 # otherwise, add the individual constraints to the list
                 if constraint.ub is not None:
@@ -64,7 +98,7 @@ class ILPProblem(Problem):
 
 
         s = 0
-        # introduce slack self.variables for all constraint equations
+        # introduce slack variables for all constraint equations
         while len(leq_constraints) != 0:
             # take out a constraint
             constraint = leq_constraints.pop()
@@ -96,43 +130,59 @@ class ILPProblem(Problem):
             slack_vars, slack_eq, slack_constraint = binary_expansion(Variable("s_{}".format(s), type="integer", lb=0, ub=next_power_of_2))
             s+=1
             
-            # add the self.variables
-            self.variables.extend(slack_vars)
+            # add the variables
+            variables.extend(slack_vars)
             
             # add the equation "constraint.expression + c - computed_lb - s = 0"; the inequality should now be trivial
-            self.constraints.append(constraint.expression + c - computed_lb - slack_eq)
+            constraints.append(constraint.expression + c - computed_lb - slack_eq)
 
 
-        # copy over the objective, but with the new self.variables
-        self.objective = Objective((1 if self.model.objective.direction=="min" else -1)*self.model.objective.expression.subs(self.substitutions), direction="min")
+        # copy over the objective, but with the new variables
+        self.objective = Objective((1 if self.problem.objective.direction=="min" else -1)*self.problem.objective.expression.subs(substitutions), direction="min")
         
-        self.Q = sympy.zeros(len(self.variables),len(self.variables))
+        Q = sympy.zeros(len(variables),len(variables))
 
         # make matrix with coefficients on the diagonal
-        self.Q += sympy.diag(*sympy.Matrix([self.objective.expression]).jacobian(self.variables))
-        penalty=10
-        zero_equations_mat = sympy.Matrix(self.constraints)
-        variables_mat = sympy.Matrix(self.variables)
+        Q += sympy.diag(*sympy.Matrix([self.objective.expression]).jacobian(variables))
+        zero_equations_mat = sympy.Matrix(constraints)
+        variables_mat = sympy.Matrix(variables)
         # get the coefficients of each equation
-        zero_equations_Jac = zero_equations_mat.jacobian(self.variables)
+        zero_equations_Jac = zero_equations_mat.jacobian(variables)
 
         # Add quadratic terms from the constraints:
-        self.Q += penalty*zero_equations_Jac.T*zero_equations_Jac
+        Q += self.penalty*zero_equations_Jac.T*zero_equations_Jac
         # Q += penalty*sympy.Add(*(sympy.hessian(eq**2, variables)  for eq in zero_equations))
 
         # Get the constant term (= the rest)
         cs = zero_equations_mat-zero_equations_Jac*variables_mat
 
         # Add the linear terms from the constraints:
-        self.Q += sympy.diag(*(penalty*2*(cs.T*zero_equations_Jac)))
+        Q += sympy.diag(*(self.penalty*2*(cs.T*zero_equations_Jac)))
         
-        return self.Q
+            
+        def to_problem_parameters(params: dict) -> dict:
+            return substitute_binary_to_integer(params, substitutions, variables)
+        
+        def from_problem_parameters(params: dict) -> dict:
+            return substitute_integer_to_binary(params, substitutions, variables)
+        
+        def initializer():
+            return from_problem_parameters(self.initializer())
+        
+        return QUBOModel(np.array(Q, dtype=int), variables=variables, initializer=initializer, to_problem_parameters=to_problem_parameters, from_problem_parameters=from_problem_parameters, backend=backend)
     
-    def parameters_from_qubo(self, params: np.ndarray) -> dict:
-        return substitute_binary_to_integer(params, self.substitutions, self.variables)
+    def evaluate_objective(self, params: np.ndarray) -> float:
+        return self.problem.objective.expression.subs(params)
     
-    def parameters_to_qubo(self, params: dict) -> np.ndarray:
-        return substitute_integer_to_binary(params, self.substitutions, self.variables)
-    
-    def evaluate_objective(self, params_bin: np.ndarray) -> float:
-        return self.objective.expression.subs(dict(zip(self.variables, params_bin)))
+    def evaluate_constraints(self, params: np.ndarray) -> Iterable[bool]:
+        sat = np.zeros((len(self.problem.constraints)+len(self.problem.variables),2), dtype=bool)
+        i=0
+        for v in self.problem.variables:
+            sat[i,:] = (True if v.lb is None else v.lb <= int(params[v]), True if v.ub is None else params[v] <= v.ub)
+            i += 1
+            
+        for c in self.problem.constraints:
+            sat[i,:] = (True if c.lb is None else c.lb <= int(c.expression.subs(params)), True if c.ub is None else int(c.expression.subs(params)) <= c.ub)
+            i += 1
+            
+        return sat 

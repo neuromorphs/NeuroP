@@ -3,3 +3,6 @@
 .. currentmodule:: neurop.Model
 .. automodule:: neurop.Model.Model
 """
+
+from .SNNModel import SNNModel
+from .QUBOModel import QUBOModel

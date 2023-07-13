@@ -3,3 +3,5 @@
 .. currentmodule:: neurop.Backend
 .. automodule:: neurop.Backend.Backend
 """
+
+from .SimulatedAnnealingBackend import SimulatedAnnealingBackend
