@@ -16,16 +16,15 @@ import time
 
 from solve_tsp import get_solution_tsp
 from helpers import *
+from api_key import api_key
 
-openai.api_key = "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"
-
+openai.api_key = api_key    # ATTENTION: replace this with your own API key (and don't push it to github)
 
 class MplCanvas(FigureCanvas):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
         super(MplCanvas, self).__init__(fig)
-
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -111,6 +110,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.data_exists = False
         self.plot_done = False
+
+        self.simulation_running = False
 
         self.show()
 
@@ -220,6 +221,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.draw_map()
 
         self.thread_manager.start(self.tsp_solver_actual) # Calling the actual solver in a separate thread
+        print("BU")
 
     def tsp_solver_actual(self):
         print("-----FLAG: TSP SOLVER-----")
@@ -244,7 +246,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.destination_lists, self.distanceMatrix, start_city, enforce_start_city
             )
 
-            m, schedule_ = parse_op_vec_tsp(sorted_samples_by_energy[0], self.N)
+            # m, schedule_ = parse_op_vec_tsp(sorted_samples_by_energy[0], self.N)
 
         self.sorted_samples_by_energy = np.array(sorted_samples_by_energy)
         self.samples_buffer = self.sorted_samples_by_energy.tolist()
