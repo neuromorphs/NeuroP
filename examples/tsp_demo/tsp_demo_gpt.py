@@ -196,6 +196,11 @@ class MainWindow(QtWidgets.QMainWindow):
             # Annotate the cities' names
             self.solution_canvas.axes.text(long+0.5, lat+0.01, label, color='k', fontsize=7)
         
+        if self.simulation_running:
+            x, y = np.mean(self.lats), np.mean(self.longs)
+            # print(x, y)
+            self.solution_canvas.axes.text(y, x-30, "SIMULATION RUNNING...", color='r', fontsize=20, ha='center', va='center')
+
         self.solution_canvas.draw()
 
     def tsp_solver(self, destination_lists, coordinate_lists):
@@ -210,16 +215,18 @@ class MainWindow(QtWidgets.QMainWindow):
         }
 
         print(destination_lists)
+        print(coordinate_lists)
+
+        coordinate_lists = np.array(coordinate_lists).astype(float)
+
+        self.lats = [coordinate[0] for coordinate in coordinate_lists]
+        self.longs = [coordinate[1] for coordinate in coordinate_lists]
 
         self.destination_lists = destination_lists
         self.coordinate_lists = coordinate_lists
 
-        print(coordinate_lists)
-        self.lats = [coordinate[0] for coordinate in coordinate_lists]
-        self.longs = [coordinate[1] for coordinate in coordinate_lists]
-
+        self.simulation_running = True
         self.draw_map()
-
         self.thread_manager.start(self.tsp_solver_actual) # Calling the actual solver in a separate thread
         print("BU")
 
@@ -259,6 +266,7 @@ class MainWindow(QtWidgets.QMainWindow):
         ans = {"best path": destinations_scheduled.tolist()}
 
         print("Done.")
+        self.simulation_running = False
         self.update_chat_output_gpt(json.dumps(ans))
 
         # return json.dumps(ans)
