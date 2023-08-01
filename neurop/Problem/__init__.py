@@ -6,3 +6,4 @@
 """
 
 from .ILPProblem import ILPProblem
+from .TSPProblem import TSPProblem

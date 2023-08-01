@@ -1,10 +1,9 @@
 """Integer linear programming (ILP) problems
 
-.. autoclass:: neurop.Problem.ILPProblem.ILPProblem
+.. autoclass:: neurop.Problem.ILPProblem
 """
 
 from collections.abc import Iterable
-import optlang
 import numpy as np
 import sympy
 from optlang import Model as OptProblem, Variable, Constraint, Objective
