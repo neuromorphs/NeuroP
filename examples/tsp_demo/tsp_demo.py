@@ -116,6 +116,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.chat_output.setPlainText(self.chat_output_text)
 
 
+
+
+
     def update_plot(self):
         # Drop off the first y element, append a new one.
         self.ydata = self.ydata[1:] + [random.randint(0, 10)]

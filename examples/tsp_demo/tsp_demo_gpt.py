@@ -217,7 +217,15 @@ class MainWindow(QtWidgets.QMainWindow):
         print(destination_lists)
         print(coordinate_lists)
 
-        coordinate_lists = np.array(coordinate_lists).astype(float)
+        # coordinate_lists = np.array(coordinate_lists).astype(float)
+        
+        # coordinate_lists = [[float(coord[0]), float(coord[0]) for coord in item.split(', ')] for item in coordinate_lists]
+
+        # coordinate_lists = [[float(lat), float(long) for lat, long in item.split(', ')] for item in coordinate_lists]
+
+        # coordinate_lists = [tuple(coord.split(', ')) for coord in coordinate_lists]
+        coordinate_lists = [tuple(map(float, str.replace(str.replace(coord, "(", ""), ")", "").split(', '))) for coord in coordinate_lists]
+
 
         self.lats = [coordinate[0] for coordinate in coordinate_lists]
         self.longs = [coordinate[1] for coordinate in coordinate_lists]
@@ -292,13 +300,13 @@ class MainWindow(QtWidgets.QMainWindow):
             {
                 "role": "system",
                 "content": "You are a helpful assistant that helps to solve combinatorial problems.\
-                    Your tasks include: 1. extract useful information from the plain-text description of the problem\
+                    Your tasks include: 1. extract useful information from the plain-text description of the problem.\
                     2. call the corresponding solver functions to solve the problem with the extracted information.\
                     You might receive one of the two types of problem: MaxCut, TSP (travelling sales person).\
                     For the MaxCut problems, you are expected to convert the user-specified graph into adjacency matrix and call the maxcut solver\
                     For the TSP problems, there are two possible scenarios:\
                     when the list of destinations are real-world cities, such as Beijing, New York, Tokyo, the list of destinations will be whatever the user has specified, and list of coordinates will be none.\
-                    when the list of destinations are symbolic, such as A, B, C, the list of destinations and list of coordinates are whatever the user has specified. Whenever you provide coordinates, make sure to provide them in floats and not in strings.",
+                    when the list of destinations are symbolic, such as A, B, C, the list of destinations and list of coordinate tuples are whatever the user has specified. ",
                 "role": "user",
                 "content": user_input,
             }
