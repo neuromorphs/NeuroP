@@ -5,5 +5,5 @@
 .. automodule:: neurop.Problem.ILPProblem
 """
 
-from .ILPProblem import ILPProblem
+from .ILPProblem import ILPProblem, ILPQUBOCompiler
 from .TSPProblem import TSPProblem

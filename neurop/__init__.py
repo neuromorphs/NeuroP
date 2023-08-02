@@ -1,1 +1,1 @@
-from .base import BaseModel, BaseProblem, BaseBackend
+from .base import BaseModel, BaseProblem, BaseBackend, BaseCompiler

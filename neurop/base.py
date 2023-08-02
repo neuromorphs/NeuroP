@@ -18,14 +18,7 @@ class BaseProblem(object):
     
     def __init__(self, initializer) -> None:
         self.initializer = initializer
-    
-    def supports_model(self, model_type) -> bool:
-        """Returns whether exporting into the given model type is supported by this problem."""
-        raise NotImplementedError("This method should be defined in a concrete derived class!")
-    
-    def convert_to_model(self, model_type, backend=None):
-        """Exports the problem into the given model type, respecting the backend, if given."""
-        raise NotImplementedError("This method should be defined in a concrete derived class!")
+        super().__init__()
     
     def evaluate_objective(self, params: np.ndarray) -> float:
         """Evaluates the objective function of the problem for a given set of (binary) parameter values."""
@@ -34,32 +27,14 @@ class BaseProblem(object):
     def evaluate_constraints(self, params: np.ndarray) -> Iterable[bool]:
         """Evaluates the constraints of the problem for a given set of (binary) parameter values."""
         raise NotImplementedError("This method should be defined in a concrete derived class!")
-    
-    
+
 class BaseModel(object):
     """Base-class for models that can be derived from various optimization problems."""
     
-    def __init__(self, variables, initializer, from_problem_parameters, to_problem_parameters, backend) -> None:
+    def __init__(self, variables, initializer) -> None:
         self.variables = variables
-        self.backend = backend
         self.initializer = initializer
-        
-        self._from_problem_parameters = from_problem_parameters
-        self._to_problem_parameters = to_problem_parameters
-        
-        if not backend.supports_model(self):
-            raise ValueError("The given backend does not support this model!")
         super().__init__()
-        
-    def run(self, **kwargs) -> Tuple[int, dict]:
-        """Execute the model with the given optional arguments."""
-        return self.backend.run(self, **kwargs)
-    
-    def from_problem_parameters(self, params):
-        return self._from_problem_parameters(params)
-    
-    def to_problem_parameters(self, params):
-        return self._to_problem_parameters(params)
 
 class BaseBackend(object):
     """Base-class for neuromorphic hardware that can run models derived from QUBO."""
@@ -67,9 +42,29 @@ class BaseBackend(object):
     def __init__(object):
         pass
     
-    def supports_model(self, model: BaseModel) -> bool:
-        raise NotImplementedError("Each backend must implement this method to specify which models it supports!")
-    
-    def run(self, model: BaseModel, **kwargs) -> Tuple[int, dict]:
+    def run(self, executable, **kwargs) -> Tuple[int, dict]:
         """Run the given model with the given optional arguments"""
         raise NotImplementedError("Each backend must implement this method to specify how to run a model!")
+
+class BaseCompiler(object):
+    """Base-class for compilers that can convert optimization problems to models and compile models to a specific backend."""
+    
+    def __init__(self, problem: BaseProblem, modelType: type, backend: BaseBackend=None, expansion=None) -> None:
+        self.problem = problem
+        self.backend = backend
+        self.modelType = modelType
+        self.expansion = expansion
+        
+    def problem_to_model_parameters(self, params):
+        """Converts the problem parameters to model parameters."""
+        raise NotImplementedError("This method should be defined in a concrete derived class!")
+    
+    def model_to_problem_parameters(self, params):
+        """Converts the model parameters to problem parameters."""
+        raise NotImplementedError("This method should be defined in a concrete derived class!")
+        
+    def compile(self) -> BaseModel:
+        """Exports the problem into the given model type, respecting the backend, if given."""
+        raise NotImplementedError("This method should be defined in a concrete derived class!")
+    
+    
