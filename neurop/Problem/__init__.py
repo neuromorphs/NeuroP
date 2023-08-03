@@ -1,9 +1,7 @@
-"""Definitions of optimization problems that can be converted to QUBO.
+"""Classes of optimization problems that can be solved using the neurop library.
 
 .. currentmodule:: neurop.Problem
-.. automodule:: neurop.Problem.Problem
-.. automodule:: neurop.Problem.ILPProblem
 """
 
-from .ILPProblem import ILPProblem, ILPQUBOCompiler
+from .ILPProblem import ILPProblem
 from .TSPProblem import TSPProblem

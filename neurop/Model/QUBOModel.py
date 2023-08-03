@@ -1,5 +1,9 @@
-from neurop import BaseModel
+"""QUBO model.
 
+.. autoclass:: neurop.Model.QUBOModel
+"""
+
+from neurop import BaseModel
 
 class QUBOModel(BaseModel):
     def __init__(self, Q, variables, initializer) -> None:

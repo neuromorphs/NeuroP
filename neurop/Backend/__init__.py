@@ -1,7 +1,6 @@
-"""Definitions of neuromorphic backends that can run the generated models.
+"""Backends (hardware, simulators or emulators) that can run the generated models.
 
 .. currentmodule:: neurop.Backend
-.. automodule:: neurop.Backend.Backend
 """
 
 from .SimulatedAnnealingBackend import SimulatedAnnealingBackend

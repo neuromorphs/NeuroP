@@ -1,3 +1,7 @@
+"""SNN model.
+
+.. autoclass:: neurop.Model.SNNModel
+"""
 from neurop import BaseModel
 
 

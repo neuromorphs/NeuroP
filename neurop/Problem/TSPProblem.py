@@ -1,6 +1,4 @@
-"""Integer linear programming (ILP) problems
-
-.. autoclass:: neurop.Problem.TSPProblem
+"""Traveling salesperson (TSP) problems
 """
 
 from collections.abc import Iterable
@@ -17,7 +15,7 @@ from neurop.utils import range_of_polynomial_with_bounded_vars
 
 
 class TSPProblem(BaseProblem):
-    """Description of Traveling Salesperson Problems for conversion to QUBO."""
+    """Traveling Salesperson Problems"""
     
     def __init__(self, graph: nx.Graph, initializer=None, penalty=10):
         """Initializes the TSP problem.

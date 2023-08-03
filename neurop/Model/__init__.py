@@ -1,7 +1,6 @@
-"""Definitions of models that can be generated from the QUBO form.
+"""Classes of models that can be executed/evaluated on the backends.
 
 .. currentmodule:: neurop.Model
-.. automodule:: neurop.Model.Model
 """
 
 from .SNNModel import SNNModel

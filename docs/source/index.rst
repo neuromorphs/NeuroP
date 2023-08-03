@@ -21,11 +21,13 @@ Solving :math:`\text{NP}`-hard problems on neuromorphic hardware using quadratic
 
 .. autosummary::
    :toctree: generated
+   :recursive:
 
+   ~neurop.base
    ~neurop.Problem
    ~neurop.Model
    ~neurop.Backend
-
+   ~neurop.Compiler
 
 Index
 ==================

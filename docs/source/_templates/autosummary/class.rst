@@ -1,27 +1,32 @@
-.. autoclass:: {{ objname }}
+{{ fullname | escape | underline}}
 
-   {% block attributes %}
-   {% if attributes %}
-   .. rubric:: Attributes
+.. currentmodule:: {{ module }}
+
+.. autoclass:: {{ objname }}
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   {% block methods %}
+   .. automethod:: __init__
+
+   {% if methods %}
+   .. rubric:: {{ _('Methods') }}
 
    .. autosummary::
-      :toctree: .
-   {% for item in attributes %}
-      ~{{ fullname }}.{{ item }}
+   {% for item in methods %}
+      ~{{ name }}.{{ item }}
    {%- endfor %}
    {% endif %}
    {% endblock %}
 
-   {% block methods %}
-   {% if methods %}
-   .. rubric:: Methods
+   {% block attributes %}
+   {% if attributes %}
+   .. rubric:: {{ _('Attributes') }}
 
    .. autosummary::
-      :toctree: .
-   {% for item in methods %}
-      {%- if item != '__init__' %}
-      ~{{ fullname }}.{{ item }}
-      {%- endif -%}
+   {% for item in attributes %}
+      ~{{ name }}.{{ item }}
    {%- endfor %}
    {% endif %}
    {% endblock %}

@@ -1,6 +1,6 @@
 """Base-classes for neuromorphic hardware that can run models derived from QUBO.
 
-.. autoclass:: neurop.Backend.Backend.Backend
+.. autoclass:: neurop.Backend.SimulatedAnnealingBackend
 """
 
 import numpy as np
