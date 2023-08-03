@@ -1,5 +1,5 @@
-# $\text{N{\color{gray}euro}}^\text{P}$
- **Neur**omorphic **op**timization for NP-hard problems using QUBO
+# $\text{N{\color{gray}euro}}\text{P}$
+**Neur**omorphic **op**timization for NP-hard problems using QUBO
 
 Documentation: [https://neuromorphs.github.io/NeuroP/](https://neuromorphs.github.io/NeuroP/)
 
