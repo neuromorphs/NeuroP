@@ -32,7 +32,7 @@ jobs:
 
       # builds the docs
       - name: Build the documentation
-        run: cd docs && make html
+        run: cd docs && make clean && make html
 
       # deploys the docs
       - name: Deploy the documentation
