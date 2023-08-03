@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>neurop.Compiler.ILPQUBOCompiler &#8212; NeuroP library for neuromorphic optimization</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2389946f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="neurop.Compiler" href="neurop.Compiler.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="neurop-compiler-ilpqubocompiler">
+<h1>neurop.Compiler.ILPQUBOCompiler<a class="headerlink" href="#neurop-compiler-ilpqubocompiler" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="neurop.Compiler.ILPQUBOCompiler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neurop.Compiler.</span></span><span class="sig-name descname"><span class="pre">ILPQUBOCompiler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem:</span> <span class="pre">~neurop.Problem.ILPProblem.ILPProblem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend:</span> <span class="pre">~neurop.base.BaseBackend</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expansion=&lt;function</span> <span class="pre">expand_integer_to_binary_encoding&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty=1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurop.Compiler.ILPQUBOCompiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="neurop.base.BaseCompiler.html#neurop.base.BaseCompiler" title="neurop.base.BaseCompiler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCompiler</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Compiler.ILPQUBOCompiler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem:</span> <span class="pre">~neurop.Problem.ILPProblem.ILPProblem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend:</span> <span class="pre">~neurop.base.BaseBackend</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expansion=&lt;function</span> <span class="pre">expand_integer_to_binary_encoding&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty=1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#neurop.Compiler.ILPQUBOCompiler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(problem[, backend, expansion, penalty])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code>()</p></td>
+<td><p>Convert the ILP problem to QUBO form.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_to_problem_parameters</span></code>(params)</p></td>
+<td><p>Converts the model parameters to problem parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">problem_to_model_parameters</span></code>(params)</p></td>
+<td><p>Converts the problem parameters to model parameters.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Compiler.ILPQUBOCompiler.compile">
+<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="neurop.Model.QUBOModel.html#neurop.Model.QUBOModel" title="neurop.Model.QUBOModel.QUBOModel"><span class="pre">QUBOModel</span></a></span></span><a class="headerlink" href="#neurop.Compiler.ILPQUBOCompiler.compile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the ILP problem to QUBO form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Compiler.ILPQUBOCompiler.model_to_problem_parameters">
+<span class="sig-name descname"><span class="pre">model_to_problem_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#neurop.Compiler.ILPQUBOCompiler.model_to_problem_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the model parameters to problem parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Compiler.ILPQUBOCompiler.problem_to_model_parameters">
+<span class="sig-name descname"><span class="pre">problem_to_model_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#neurop.Compiler.ILPQUBOCompiler.problem_to_model_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the problem parameters to model parameters.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">NeuroP</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="neurop.base.html">neurop.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neurop.Problem.html">neurop.Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neurop.Model.html">neurop.Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neurop.Backend.html">neurop.Backend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="neurop.Compiler.html">neurop.Compiler</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">neurop.Compiler.ILPQUBOCompiler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#neurop.Compiler.ILPQUBOCompiler"><code class="docutils literal notranslate"><span class="pre">ILPQUBOCompiler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Compiler.ILPQUBOCompiler.__init__"><code class="docutils literal notranslate"><span class="pre">ILPQUBOCompiler.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Compiler.ILPQUBOCompiler.compile"><code class="docutils literal notranslate"><span class="pre">ILPQUBOCompiler.compile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Compiler.ILPQUBOCompiler.model_to_problem_parameters"><code class="docutils literal notranslate"><span class="pre">ILPQUBOCompiler.model_to_problem_parameters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Compiler.ILPQUBOCompiler.problem_to_model_parameters"><code class="docutils literal notranslate"><span class="pre">ILPQUBOCompiler.problem_to_model_parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="neurop.Compiler.html">neurop.Compiler</a><ul>
+      <li>Previous: <a href="neurop.Compiler.html" title="previous chapter">neurop.Compiler</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Andreas Andreou, Gert Cauwenberghs, Heeyoung Chae, Shantanu Chakrabartty, Zihao Chen, Nik Dennler, Michael Furlong, Chad Harper, Johannes Leugering, Adil Malik, Omowuyi Olajide, Riccardo Pignari, Zhili Xiao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/generated/neurop.Compiler.ILPQUBOCompiler.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

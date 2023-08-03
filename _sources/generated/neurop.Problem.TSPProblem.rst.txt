@@ -1,0 +1,30 @@
+neurop.Problem.TSPProblem
+=========================
+
+.. currentmodule:: neurop.Problem
+
+.. autoclass:: TSPProblem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TSPProblem.__init__
+      ~TSPProblem.convert_to_model
+      ~TSPProblem.evaluate_constraints
+      ~TSPProblem.evaluate_objective
+      ~TSPProblem.supports_model
+      ~TSPProblem.to_qubo
+   
+   
+
+   
+   
+   

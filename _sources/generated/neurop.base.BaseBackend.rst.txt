@@ -1,0 +1,26 @@
+neurop.base.BaseBackend
+=======================
+
+.. currentmodule:: neurop.base
+
+.. autoclass:: BaseBackend
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BaseBackend.__init__
+      ~BaseBackend.run
+   
+   
+
+   
+   
+   

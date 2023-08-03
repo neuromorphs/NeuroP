@@ -1,0 +1,36 @@
+neurop.Problem.ILPProblem
+=========================
+
+.. currentmodule:: neurop.Problem
+
+.. autoclass:: ILPProblem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ILPProblem.__init__
+      ~ILPProblem.evaluate_constraints
+      ~ILPProblem.evaluate_objective
+      ~ILPProblem.supports_model
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ILPProblem.constraints
+      ~ILPProblem.objective
+      ~ILPProblem.variables
+   
+   

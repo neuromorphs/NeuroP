@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>neurop.Problem.TSPProblem &#8212; NeuroP library for neuromorphic optimization</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2389946f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="neurop.Model" href="neurop.Model.html" />
+    <link rel="prev" title="neurop.Problem.ILPProblem" href="neurop.Problem.ILPProblem.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="neurop-problem-tspproblem">
+<h1>neurop.Problem.TSPProblem<a class="headerlink" href="#neurop-problem-tspproblem" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="neurop.Problem.TSPProblem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neurop.Problem.</span></span><span class="sig-name descname"><span class="pre">TSPProblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurop.Problem.TSPProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="neurop.base.BaseProblem.html#neurop.base.BaseProblem" title="neurop.base.BaseProblem"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseProblem</span></code></a></p>
+<p>Traveling Salesperson Problems</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Problem.TSPProblem.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurop.Problem.TSPProblem.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the TSP problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>problem</strong> (<em>OptProblem</em>) – the optlang problem</p></li>
+<li><p><strong>initializer</strong> (<em>_type_</em><em>, </em><em>optional</em>) – function to initialize the parameters of the problem. Defaults to None, which means that parameters will be randomly initialized.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(graph[, initializer, penalty])</p></td>
+<td><p>Initializes the TSP problem.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_to_model</span></code>(model_type[, backend])</p></td>
+<td><p>Converts the problem to a model of given type, if supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_constraints</span></code>(params)</p></td>
+<td><p>Evaluates the constraints of the problem for a given set of (binary) parameter values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_objective</span></code>(params)</p></td>
+<td><p>Evaluates the objective function of the problem for a given set of (binary) parameter values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">supports_model</span></code>(model_type)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_qubo</span></code>([backend])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Problem.TSPProblem.convert_to_model">
+<span class="sig-name descname"><span class="pre">convert_to_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="neurop.base.BaseModel.html#neurop.base.BaseModel" title="neurop.base.BaseModel"><span class="pre">BaseModel</span></a></span></span><a class="headerlink" href="#neurop.Problem.TSPProblem.convert_to_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the problem to a model of given type, if supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>backend</strong> (<em>Backend</em><em>, </em><em>optional</em>) – The backend for which to derive the QUBO form. Defaults to None, which means no special requirements are imposed on the Q matrix.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – May return a ValueError if the problem cannot be converted to the required model type.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>returns the QUBO matrix</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Problem.TSPProblem.evaluate_constraints">
+<span class="sig-name descname"><span class="pre">evaluate_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#neurop.Problem.TSPProblem.evaluate_constraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the constraints of the problem for a given set of (binary) parameter values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurop.Problem.TSPProblem.evaluate_objective">
+<span class="sig-name descname"><span class="pre">evaluate_objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#neurop.Problem.TSPProblem.evaluate_objective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the objective function of the problem for a given set of (binary) parameter values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">NeuroP</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="neurop.base.html">neurop.base</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="neurop.Problem.html">neurop.Problem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="neurop.Problem.ILPProblem.html">neurop.Problem.ILPProblem</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">neurop.Problem.TSPProblem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#neurop.Problem.TSPProblem"><code class="docutils literal notranslate"><span class="pre">TSPProblem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Problem.TSPProblem.__init__"><code class="docutils literal notranslate"><span class="pre">TSPProblem.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Problem.TSPProblem.convert_to_model"><code class="docutils literal notranslate"><span class="pre">TSPProblem.convert_to_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Problem.TSPProblem.evaluate_constraints"><code class="docutils literal notranslate"><span class="pre">TSPProblem.evaluate_constraints()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neurop.Problem.TSPProblem.evaluate_objective"><code class="docutils literal notranslate"><span class="pre">TSPProblem.evaluate_objective()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="neurop.Model.html">neurop.Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neurop.Backend.html">neurop.Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neurop.Compiler.html">neurop.Compiler</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="neurop.Problem.html">neurop.Problem</a><ul>
+      <li>Previous: <a href="neurop.Problem.ILPProblem.html" title="previous chapter">neurop.Problem.ILPProblem</a></li>
+      <li>Next: <a href="neurop.Model.html" title="next chapter">neurop.Model</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Andreas Andreou, Gert Cauwenberghs, Heeyoung Chae, Shantanu Chakrabartty, Zihao Chen, Nik Dennler, Michael Furlong, Chad Harper, Johannes Leugering, Adil Malik, Omowuyi Olajide, Riccardo Pignari, Zhili Xiao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/generated/neurop.Problem.TSPProblem.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

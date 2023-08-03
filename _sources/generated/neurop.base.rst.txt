@@ -1,0 +1,33 @@
+﻿neurop.base
+===========
+
+.. automodule:: neurop.base
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      BaseBackend
+      BaseCompiler
+      BaseModel
+      BaseProblem
+   
+   
+
+   
+   
+   
+
+
+

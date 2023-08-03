@@ -1,0 +1,25 @@
+neurop.base.BaseModel
+=====================
+
+.. currentmodule:: neurop.base
+
+.. autoclass:: BaseModel
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BaseModel.__init__
+   
+   
+
+   
+   
+   

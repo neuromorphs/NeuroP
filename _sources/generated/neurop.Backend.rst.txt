@@ -1,0 +1,31 @@
+﻿neurop.Backend
+==============
+
+.. automodule:: neurop.Backend
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   neurop.Backend.SimulatedAnnealingBackend
+

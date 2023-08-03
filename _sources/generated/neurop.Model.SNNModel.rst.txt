@@ -1,0 +1,25 @@
+neurop.Model.SNNModel
+=====================
+
+.. currentmodule:: neurop.Model
+
+.. autoclass:: SNNModel
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SNNModel.__init__
+   
+   
+
+   
+   
+   
