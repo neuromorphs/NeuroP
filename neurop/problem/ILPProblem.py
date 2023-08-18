@@ -5,7 +5,7 @@ import numpy as np
 from optlang import Model as OptProblem
 
 from neurop import BaseProblem, BaseModel
-from neurop.Model import QUBOModel
+from neurop.model import QUBOModel
 from neurop.base import BaseProblem
 
 

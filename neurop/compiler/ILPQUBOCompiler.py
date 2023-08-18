@@ -1,6 +1,6 @@
 from neurop import BaseCompiler, BaseProblem
-from neurop.Problem import ILPProblem
-from neurop.Model import QUBOModel
+from neurop.problem import ILPProblem
+from neurop.model import QUBOModel
 from neurop.base import BaseBackend, BaseProblem
 from neurop.expansions import expand_integer_to_binary_encoding, substitute_binary_to_integer, substitute_integer_to_binary
 from neurop.utils import range_of_polynomial_with_bounded_vars

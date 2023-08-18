@@ -8,7 +8,7 @@ import random
 from collections.abc import Iterable
 from neurop import BaseBackend
 from neurop import BaseModel
-from neurop.Model import QUBOModel
+from neurop.model import QUBOModel
 from tqdm import tqdm
 
 class SimulatedAnnealingBackend(BaseBackend):

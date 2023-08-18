@@ -9,7 +9,7 @@ import networkx as nx
 
 from neurop import BaseProblem
 from neurop import BaseModel
-from neurop.Model import QUBOModel
+from neurop.model import QUBOModel
 from neurop.expansions import expand_integer_to_binary_encoding, substitute_binary_to_integer, substitute_integer_to_binary
 from neurop.utils import range_of_polynomial_with_bounded_vars
 
